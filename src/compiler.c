@@ -2,5 +2,6 @@
 
 int main(void)
 {
+    FILE *fp;
     return 0;
 }

@@ -18,4 +18,12 @@
 #include "../include/tools/codeGeneratorTools.h"
 #include "../include/typeList.h"
 
+
+#define DEBUG_ON
+#ifdef DEBUG_ON
+#define DEBUG_LOG(...)    printf("%s(%d) %s:",__FILE__,__LINE__,__func__),printf(__VA_ARGS__)
+#else
+#define DEBUG_LOG(...)  
+#endif
+
 #endif

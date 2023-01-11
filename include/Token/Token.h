@@ -13,10 +13,8 @@
         char *str;
         int val;
     };
-    
-    Token *token;
 
-    void SetNumToken(int val);
-    void SetStrToken(char *set_str);
+    void SetNumToken(Token *token,int val);
+    void SetStrToken(Token *token,char *set_str);
 
 #endif

@@ -8,6 +8,7 @@
         "stdbool.h": "c",
         "token.h": "c",
         "tokenizer.h": "c",
-        "memory_resource": "c"
+        "memory_resource": "c",
+        "ctype.h": "c"
     }
 }

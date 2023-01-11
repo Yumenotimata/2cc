@@ -6,6 +6,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-    void Tokenize(FILE *compile_file);
+    Token *Tokenize(FILE *compile_file);
 
 #endif

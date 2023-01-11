@@ -1,7 +1,9 @@
 #include "../../include/Token/Tokenizer.h"
 
-void Tokenize(FILE *compile_file)
+Token *Tokenize(FILE *compile_file)
 {
+    Token *token = calloc(1,sizeof(Token));
+
     char *compile_file_str = fp2str(compile_file);
     printf("%s\n",compile_file_str);
 
@@ -15,13 +17,15 @@ void Tokenize(FILE *compile_file)
         }
         else if(isdigit(*compile_file_str))
         {
-            SetNumToken(strtol(compile_file_str,&compile_file_str,10));
+            SetNumToken(token,strtol(compile_file_str,&compile_file_str,10));
             printf("set num token\n");
         }
         else if(ischar(*compile_file_str))
         {
             printf("set str token\n");
-            SetStrToken(compile_file_str);
+            printf("now %s\n",compile_file_str);
+            SetStrToken(token,compile_file_str);
+            printf("after %s\n",compile_file_str);
         }
         else if(issymbol(*compile_file_str))
         {
@@ -33,7 +37,12 @@ void Tokenize(FILE *compile_file)
             printf("unexpected token\n");
             exit(1);
         }
+        printf("add token");
+        token->next = calloc(1,sizeof(Token));
+        token = token->next;
 
     }
+
+    return token;
 }
 

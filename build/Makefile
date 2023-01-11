@@ -1,16 +1,16 @@
-VPATH = ../src:../src/tools:../include:../include/tools
+VPATH = ../src:../src/Token:../include:../include/Token
 
-2cc:compiler.o tokenizer.o tokenizerTools.o token.o
-	gcc -o 2cc compiler.o tokenizer.o tokenizerTools.o token.o
+main:main.o Token.o Tokenizer.o TokenizerTools.o
+	gcc -o main main.o Token.o Tokenizer.o TokenizerTools.o
 
-compiler.o:compiler.c compiler.h
-	gcc -c ../src/compiler.c ../include/compiler.h
+main.o:main.c 
+	gcc -c ../src/main.c
 
-tokenizer.o:tokenizer.c compiler.h
-	gcc -c ../src/tokenizer.c ../include/compiler.h
+Token.o:Token.c Token.h
+	gcc -c ../src/Token/Token.c ../include/Token/Token.h
 
-tokenizerTools.o:tokenizerTools.c tokenizerTools.h
-	gcc -c ../src/tools/tokenizerTools.c ../include/tools/tokenizerTools.h
+Tokenizer.o:Tokenizer.c Tokenizer.h
+	gcc -c ../src/Token/Tokenizer.c ../include/Token/Tokenizer.h
 
-token.o:token.c token.h
-	gcc -c ../src/token.c ../include/token.h
+TokenizerTools.o:TokenizerTools.c TokenizerTools.h
+	gcc -c ../src/Token/TokenizerTools.c ../include/Token/TokenizerTools.h

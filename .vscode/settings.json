@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "compiler.h": "c",
+        "codegeneratortools.h": "c",
+        "tokenizertools.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "stdbool.h": "c",
+        "token.h": "c",
+        "tokenizer.h": "c",
+        "memory_resource": "c"
+    }
+}

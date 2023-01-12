@@ -4,6 +4,7 @@ Token *Tokenize(FILE *compile_file)
 {
     Token *token = calloc(1,sizeof(Token));
     Token *h_token = token;
+
     char *compile_file_str = fp2str(compile_file);
     printf("%s\n",compile_file_str);
 
@@ -44,9 +45,18 @@ Token *Tokenize(FILE *compile_file)
     }
     token->next = NULL;
     token = h_token;
+
+
+    printf("ok\n");
+    if(token == NULL)
+    {
+        printf("token is NULL");
+
+    }
     while(token != NULL)
     {
-        if((token->kind) == TK_STR)
+        printf("token is not NULL\n");
+        if(!memcmp(token->kind,TK_STR,strlen(token->kind)))
         {
             printf("token->val = %s\n",token->str);
         }

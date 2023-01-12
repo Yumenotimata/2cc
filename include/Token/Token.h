@@ -15,6 +15,7 @@
     };
 
     void SetNumToken(Token *token,int val);
-    void SetStrToken(Token *token,char *set_str);
+    void SetStrToken(Token *token,char **set_str);
+    void SetSymToken(Token *token,char **set_symbol);
 
 #endif

@@ -27,11 +27,36 @@ char *ConsumeStr(char **str)
     {
         *read_str = **str;
         read_str++;
-        *str++;
+        //これかっこいるんだ
+        (*str)++;
     }
     *read_str = '\0';
 
     return h_read_str;
+}
+
+char *ConsumeSymbol(char **str)
+{
+    char *symbol_s[] = 
+    {
+        "==",   "<=",   ">=",   "(",    ")",  
+        "+",    "-",    "*",    "/",    "=",
+        ";"
+    };
+
+    printf("*symbol_s size is %ld\n",(sizeof(symbol_s)/sizeof(*symbol_s)));
+    for(int ar_ptr_i = 0;ar_ptr_i < (sizeof(symbol_s)/sizeof(*symbol_s));ar_ptr_i++)
+    {
+        printf("compare %s %s\n",*str,symbol_s[ar_ptr_i]);
+        if(!memcmp((*str),symbol_s[ar_ptr_i],strlen((symbol_s[ar_ptr_i]))))
+        {
+            printf("%s is match to %s\n",(*str),symbol_s[ar_ptr_i]);
+            (*str) += strlen(symbol_s[ar_ptr_i]);
+            return symbol_s[ar_ptr_i];
+        }
+    }
+    printf("unexpected symbol\n");
+    exit(1);
 }
 
 bool ischar(char ch)
@@ -55,9 +80,18 @@ bool issymbol(char ch)
     {
         '+',    '-',    '*',    '/',
         '(',    ')',    '{',    '}',
-        ';'
+        ';',    '='
     };
 
     printf("size is %ld\n",sizeof(symbol_s));
-    exit(1);
+    for(int ar_i = 0;ar_i < sizeof(symbol_s);ar_i++)
+    {
+        if(symbol_s[ar_i] == ch)
+        {
+            printf("issymbol:return true\n");
+            return true;
+        }
+    }
+printf("issymbol:return false\n");
+    return false;
 }

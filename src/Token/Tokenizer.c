@@ -3,7 +3,7 @@
 Token *Tokenize(FILE *compile_file)
 {
     Token *token = calloc(1,sizeof(Token));
-
+    Token *h_token = token;
     char *compile_file_str = fp2str(compile_file);
     printf("%s\n",compile_file_str);
 
@@ -24,23 +24,35 @@ Token *Tokenize(FILE *compile_file)
         {
             printf("set str token\n");
             printf("now %s\n",compile_file_str);
-            SetStrToken(token,compile_file_str);
+            SetStrToken(token,&compile_file_str);
             printf("after %s\n",compile_file_str);
         }
         else if(issymbol(*compile_file_str))
         {
-            printf("symbo");
-            exit(1);
+            printf("symbo %c\n",*compile_file_str);
+            SetSymToken(token,&compile_file_str);
         }
         else
         {
             printf("unexpected token\n");
             exit(1);
         }
-        printf("add token");
+        printf("add token\n");
         token->next = calloc(1,sizeof(Token));
         token = token->next;
 
+    }
+    token->next = NULL;
+    token = h_token;
+    while(token != NULL)
+    {
+        if((token->kind) == TK_STR)
+        {
+            printf("token->val = %s\n",token->str);
+        }
+
+
+        token = token->next;
     }
 
     return token;

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 //読み込む文字の数
 //なんだこのクソはと思ったそこのあなたは関数fp2strを参照
@@ -13,6 +14,7 @@
 
     char *fp2str(FILE *compile_file);
     char *ConsumeStr(char **str);
+    char *ConsumeSymbol(char **str);
     bool ischar(char ch);
     bool issymbol(char ch);
 

@@ -9,6 +9,9 @@
         "token.h": "c",
         "tokenizer.h": "c",
         "memory_resource": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "parser.h": "c",
+        "node.h": "c",
+        "stringtool.h": "c"
     }
 }

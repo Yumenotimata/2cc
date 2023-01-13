@@ -2,8 +2,6 @@
 
 char *fp2str(FILE *compile_file)
 {
-    //ファイルポインタを一度読むと、なぜか再度読むことができないのでファイルのサイズがわからない
-    //そしてこのようなクソになりました
     char *compile_file_str = calloc(MAX_FILE_CHAR_SIZE,sizeof(char));
     char *h_str = compile_file_str;
 
@@ -95,3 +93,4 @@ bool issymbol(char ch)
 printf("issymbol:return false\n");
     return false;
 }
+

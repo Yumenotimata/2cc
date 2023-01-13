@@ -4,6 +4,7 @@
     #include "TokenizerTools.h"
     #define TK_NUM "TK_NUM"
     #define TK_STR "TK_STR"
+    #define TK_EOF "TK_EOF"
     #define TK_SYMBOL "TK_SYMBOL"
  
     typedef struct Token Token;
@@ -17,5 +18,6 @@
     void SetNumToken(Token *token,int val);
     void SetStrToken(Token *token,char **set_str);
     void SetSymToken(Token *token,char **set_symbol);
+    void ShowToken(Token *token);
 
 #endif

@@ -1,4 +1,6 @@
 #include "../include/Token/Tokenizer.h"
+#include "../include/Parser/Parser.h"
+#include "../include/Parser/Node/Node.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,5 +23,9 @@ int main(int argc,char *argv[])
         exit(1);
     }
 
-    Tokenize(compile_file);
+    Token *token = Tokenize(compile_file);
+    ShowToken(token);
+    
+    Node *node = Parse(token);
+printf("returned %s\n",token->kind);
 }

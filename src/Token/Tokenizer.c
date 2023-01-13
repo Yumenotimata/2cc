@@ -43,27 +43,9 @@ Token *Tokenize(FILE *compile_file)
         token = token->next;
 
     }
+    token->kind = TK_EOF;
     token->next = NULL;
     token = h_token;
-
-
-    printf("ok\n");
-    if(token == NULL)
-    {
-        printf("token is NULL");
-
-    }
-    while(token != NULL)
-    {
-        printf("token is not NULL\n");
-        if(!memcmp(token->kind,TK_STR,strlen(token->kind)))
-        {
-            printf("token->val = %s\n",token->str);
-        }
-
-
-        token = token->next;
-    }
 
     return token;
 }

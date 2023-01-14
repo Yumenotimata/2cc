@@ -2,7 +2,9 @@
 #define NODE_H
 
     #include <stdio.h>
+    #include <stdlib.h>
     
+    extern const char *node_kind[];
 
     typedef enum
     {
@@ -11,6 +13,7 @@
         ND_SUB,
         ND_MUL,
         ND_DIV,
+        ND_CALC,
     }NodeKind;
 
     typedef struct Node Node;

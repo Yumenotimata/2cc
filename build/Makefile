@@ -1,8 +1,8 @@
-VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools:../src/Env:../include/Env:../src/Analyzer:../include/Analyzer
+VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools:../src/Env:../include/Env:../src/Analyzer:../include/Analyzer:../src/Generator:../include/Generator
 CFLAGS = -g -c
 
-main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o
-	gcc -g -o main main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o
+main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
+	gcc -g -o main main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
 
 main.o:main.c 
 	gcc $(CFLAGS) ../src/main.c
@@ -36,6 +36,12 @@ Analyzer.o:Analyzer.c Analyzer.h
 
 AnalyzerTools.o:AnalyzerTools.c AnalyzerTools.h
 	gcc $(CFLAGS) ../src/Analyzer/AnalyzerTools.c ../include/Analyzer/AnalyzerTools.h
+
+Generator.o:Generator.c Generator.h
+	gcc $(CFLAGS) ../src/Generator/Generator.c ../include/Generator/Generator.h
+
+GeneratorTools.o:GeneratorTools.c GeneratorTools.h
+	gcc $(CFLAGS) ../src/Generator/GeneratorTools.c ../include/Generator/GeneratorTools.h
 
 
 

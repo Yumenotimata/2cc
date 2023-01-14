@@ -16,6 +16,9 @@
         "string.h": "c",
         "stddef.h": "c",
         "env.h": "c",
-        "parsertools.h": "c"
+        "parsertools.h": "c",
+        "analyzer.h": "c",
+        "generator.h": "c",
+        "generatortools.h": "c"
     }
 }

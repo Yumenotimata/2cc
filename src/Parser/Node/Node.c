@@ -1,5 +1,10 @@
 #include "../../../include/Parser/Node/Node.h"
 
+const char *node_kind[6] =
+{
+    "ND_NUM","ND_ADD","ND_SUB","ND_MUL","ND_DIV","ND_CALC"
+};
+
 Node *createNumNode(int val)
 {
     Node *node = calloc(1,sizeof(Node));

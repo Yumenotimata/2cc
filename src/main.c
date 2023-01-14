@@ -2,6 +2,7 @@
 #include "../include/Parser/Parser.h"
 #include "../include/Parser/Node/Node.h"
 #include "../include/Env/Env.h"
+#include "../include/Generator/Generator.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,5 +31,8 @@ int main(int argc,char *argv[])
     Env *env = initEnv();
 
     Node *node = Parse(&token,&env);
+    printf("\n\n%d\n\n",node->val);
+    //printf("%d\n",node->lhs->val);
+    GenerateCode(node,&env);
 
 }

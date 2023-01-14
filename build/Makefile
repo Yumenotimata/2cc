@@ -1,4 +1,4 @@
-VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools:../src/Env:../include/Env:../src/Analyzer:../include/Analyzer:../src/Generator:../include/Generator
+VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools:../src/Env:../include/Env:../src/Analyzer:../include/Analyzer:../src/Generator:../include/Generator:../out
 CFLAGS = -g -c
 
 main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
@@ -43,5 +43,9 @@ Generator.o:Generator.c Generator.h
 GeneratorTools.o:GeneratorTools.c GeneratorTools.h
 	gcc $(CFLAGS) ../src/Generator/GeneratorTools.c ../include/Generator/GeneratorTools.h
 
+
+run:
+	nasm -g -f elf64 -o code.o ../out/code.asm 
+	gcc -o code code.o
 
 

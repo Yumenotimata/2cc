@@ -1,23 +1,36 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-    #include "TokenizerTools.h"
-    #define TK_NUM "TK_NUM"
-    #define TK_STR "TK_STR"
-    #define TK_EOF "TK_EOF"
-    #define TK_SYMBOL "TK_SYMBOL"
- 
+    #include <stddef.h>
+    #include <stdbool.h>
+    #include "../../include/Token/TokenizerTools.h"
+    #include "../../include/Tools/StringTool.h"
+
+    typedef enum
+    {
+        TK_NUM,
+        TK_STR,
+        TK_EOF,
+        TK_SYMBOL,
+        TK_EOS,
+    }TokenKind;
+
     typedef struct Token Token;
-    struct Token{
+    struct Token
+    {
         Token *next;
-        char *kind;
+        TokenKind kind;
         char *str;
         int val;
     };
+
+    extern const char *token_kind[];
 
     void SetNumToken(Token *token,int val);
     void SetStrToken(Token *token,char **set_str);
     void SetSymToken(Token *token,char **set_symbol);
     void ShowToken(Token *token);
+    bool match(Token **token,char *expect_str);
+    int readNum(Token **cur_token);
 
 #endif

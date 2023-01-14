@@ -1,5 +1,9 @@
 #include "../../include/Token/Token.h"
 
+const char *token_kind[5] = 
+{
+    "TK_NUM","TK_STR","TK_EOF","TK_SYMBOL","TK_EOS"
+};
 
 void SetNumToken(Token *token,int val)
 {
@@ -23,18 +27,36 @@ void ShowToken(Token *token)
 {
     if(token == NULL)
     {
-        printf("returned");
         return;
     }
 
-    if(!memcmp(token->kind,TK_NUM,strlen(token->kind)))
+    printf("show %s\n",token_kind[token->kind]);
+    switch(token->kind)
     {
-        printf("token:%d\n",token->val);
+        case TK_SYMBOL:
+            printf("->tk symbol %s\n",token->str);
     }
-    else
+    ShowToken(token->next);
+}
+
+bool match(Token **token,char *expect_str)
+{
+    if(isSameString((*token)->str,expect_str))
     {
-        printf("token:%s\n",token->str);
+        (*token) = (*token)->next;
+        return true;
     }
 
-    ShowToken(token->next);
+    printf("expected %s\n",expect_str);
+    printf("but %s\n",(*token)->str);
+    
+    return false;
+}
+
+int readNum(Token **cur_token)
+{
+    int val_buf = (*cur_token)->val;
+    (*cur_token) = (*cur_token)->next;
+
+    return val_buf;
 }

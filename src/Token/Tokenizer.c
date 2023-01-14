@@ -33,6 +33,12 @@ Token *Tokenize(FILE *compile_file)
             printf("symbo %c\n",*compile_file_str);
             SetSymToken(token,&compile_file_str);
         }
+        else if(!memcmp(compile_file_str,";",1))
+        {
+            printf("; is notice\n");
+            token->kind = TK_EOS;
+            compile_file_str++;
+        }
         else
         {
             printf("unexpected token\n");
@@ -43,9 +49,11 @@ Token *Tokenize(FILE *compile_file)
         token = token->next;
 
     }
+
     token->kind = TK_EOF;
     token->next = NULL;
     token = h_token;
+    printf("tokenize ended\n");
 
     return token;
 }

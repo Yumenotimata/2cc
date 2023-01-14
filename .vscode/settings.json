@@ -12,6 +12,10 @@
         "ctype.h": "c",
         "parser.h": "c",
         "node.h": "c",
-        "stringtool.h": "c"
+        "stringtool.h": "c",
+        "string.h": "c",
+        "stddef.h": "c",
+        "env.h": "c",
+        "parsertools.h": "c"
     }
 }

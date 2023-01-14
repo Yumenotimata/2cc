@@ -1,6 +1,7 @@
 #include "../include/Token/Tokenizer.h"
 #include "../include/Parser/Parser.h"
 #include "../include/Parser/Node/Node.h"
+#include "../include/Env/Env.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -25,7 +26,9 @@ int main(int argc,char *argv[])
 
     Token *token = Tokenize(compile_file);
     ShowToken(token);
-    
-    Node *node = Parse(token);
-printf("returned %s\n",token->kind);
+
+    Env *env = initEnv();
+
+    Node *node = Parse(&token,&env);
+
 }

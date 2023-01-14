@@ -38,8 +38,7 @@ char *ConsumeSymbol(char **str)
     char *symbol_s[] = 
     {
         "==",   "<=",   ">=",   "(",    ")",  
-        "+",    "-",    "*",    "/",    "=",
-        ";"
+        "+",    "-",    "*",    "/",    "="
     };
 
     printf("*symbol_s size is %ld\n",(sizeof(symbol_s)/sizeof(*symbol_s)));
@@ -78,7 +77,7 @@ bool issymbol(char ch)
     {
         '+',    '-',    '*',    '/',
         '(',    ')',    '{',    '}',
-        ';',    '='
+        '='
     };
 
     printf("size is %ld\n",sizeof(symbol_s));

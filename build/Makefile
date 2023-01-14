@@ -1,8 +1,8 @@
-VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools
+VPATH = ../src:../src/Token:../include:../include/Token:../src/Token:../src/Parser:../src/Parser/Node:../include/Parser:../include/Parser/Node:../src/Tools:../include/Tools:../src/Env:../include/Env:../src/Analyzer:../include/Analyzer
 CFLAGS = -g -c
 
-main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o
-	gcc -g -o main main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o
+main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o
+	gcc -g -o main main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o
 
 main.o:main.c 
 	gcc $(CFLAGS) ../src/main.c
@@ -28,6 +28,14 @@ ParserTools.o:ParserTools.c ParserTools.h
 StringTool.o:StringTool.c StringTool.h
 	gcc $(CFLAGS) ../src/Tools/StringTool.c ../include/Tools/StringTool.h
 
+Env.o:Env.c Env.h
+	gcc $(CFLAGS) ../src/Env/Env.c ../include/Env/Env.h
+
+Analyzer.o:Analyzer.c Analyzer.h
+	gcc $(CFLAGS) ../src/Analyzer/Analyzer.c ../include/Analyzer/Analyzer.h
+
+AnalyzerTools.o:AnalyzerTools.c AnalyzerTools.h
+	gcc $(CFLAGS) ../src/Analyzer/AnalyzerTools.c ../include/Analyzer/AnalyzerTools.h
 
 
 

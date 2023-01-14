@@ -2,9 +2,14 @@
 
 bool isSameString(char *base_string,char *cmp_string)
 {
-    if(!memcmp(cmp_string,cmp_string,strlen(base_string)))
+    if(!memcmp(base_string,cmp_string,strlen(base_string)))
     {
-        return true;
+        if(strlen(base_string) == strlen(cmp_string))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     return false;

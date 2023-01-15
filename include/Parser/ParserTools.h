@@ -12,5 +12,7 @@
     Node *parseStr(Token **cur_token,Env **cur_env,Node *cur_node);
     Node *isInitializetion(Token **cur_token,Env **cur_env,Node *cur_node);
     Node *isDeclaration(Token **cur_token,Env **cur_env,Node *cur_node,TypeKind kind);
+    Node *isAssign(Token **cur_token,Env **cur_env,Node *cur_node);
+    Node *isReturn(Token **cur_token,Env **cur_env,Node *cur_node);
 
 #endif

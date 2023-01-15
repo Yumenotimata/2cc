@@ -3,11 +3,61 @@ main:
     push rbp
     mov rbp,rsp
     sub rsp,64
-    mov rax,23
-    mov QWORD[rbp-8],1
-    mov rax,QWORD[rbp-8]
+    push 35
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
     push rax
-    pop rbx
+    pop rax
+    mov [rbp-4],rax
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
+    push rax
+    mov [rbp-5],0
+    push 2
+    pop rdi
+    pop rax
+    imul rax,rdi
+    push rax
+    push 35
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
+    push rax
+    pop rax
+    mov [rbp-4],rax
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
+    push rax
+    mov [rbp-5],0
+    push 2
+    pop rdi
+    pop rax
+    imul rax,rdi
+    push rax
+    push 35
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
+    push rax
+    push 2
+    pop rdi
+    pop rax
+    add rax,rdi
+    push rax
+    push 2
+    pop rdi
+    pop rax
+    imul rax,rdi
+    push rax
+pop rbx
     mov rsp,rbp
-    pop rbp
-    ret
+      pop rbp
+      ret

@@ -56,7 +56,7 @@ void genDiv(Node *cur_node,Env **cur_env)
     return;
 }
 
-void genVal(Node *cur_node,Env **cur_env)
+void genNum(Node *cur_node,Env **cur_env)
 {
     switch(cur_node->kind)
     {
@@ -69,11 +69,17 @@ void genVal(Node *cur_node,Env **cur_env)
     return;
 }
 
+void genVal(Node *cur_node,Env **cur_env)
+{
+    findEnv(cur_env,cur_node->str);
+    printf("    push [rbp-%d]\n",(*cur_env)->offset);
+}
+
 
 void genChild(Node *cur_node,Env **cur_env)
 {
-    genVal(cur_node->lhs,cur_env);
-    genVal(cur_node->rhs,cur_env);
+    //genVal(cur_node->lhs,cur_env);
+    //genVal(cur_node->rhs,cur_env);
 
     if((cur_node->lhs->kind == ND_NUM) && (cur_node->rhs->kind != ND_NUM))
     {
@@ -105,4 +111,25 @@ void genInitializetion(Node *cur_node,Env **cur_env)
         printf("    mov [rbp-%d],0\n",(*cur_env)->offset);
         fprintf(out_fp,"    mov [rbp-%d],0\n",(*cur_env)->offset);
     }
+}
+
+void genAssign(Node *cur_node,Env **cur_env)
+{
+    printf("gen assign\n");
+    printf("%s tansaku\n",(cur_node)->str);
+    GenerateCalc(cur_node->rhs,cur_env);
+    findEnv(cur_env,cur_node->str);
+    printf("    pop rax\n");
+    printf("    mov [rbp-%d],rax\n",(*cur_env)->offset);
+
+    return;
+}
+
+void genReturn(Node *cur_node,Env **cur_env)
+{
+    printf("gen return\n");
+    GenerateCalc(cur_node->rhs,cur_env);
+    printf("    pop rbx\n");
+    printf("    ret\n");
+    return;
 }

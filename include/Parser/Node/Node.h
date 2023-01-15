@@ -37,6 +37,8 @@
         ND_CALC,
         ND_VAL,
         ND_INIT,
+        ND_ASSIGN,
+        ND_RETURN,
     }NodeKind;
 
     typedef struct Node Node;
@@ -53,5 +55,6 @@
     Node *createNumNode(int val);
     Node *createNode(Node *lhs,Node *rhs,NodeKind kind);
     Node *createVariableNode(char *variable_name,TypeKind type,Env **cur_env);
+    Node *createStrNode(char *str);
 
 #endif

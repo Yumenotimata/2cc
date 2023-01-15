@@ -18,8 +18,11 @@ void analyzeOffset(Node **cur_node,Env **cur_env)
             findEnv(cur_env,(*cur_node)->str);
             printf("herehehrere\n");
             printf("%s\n",(*cur_env)->id);
-            (*cur_env)->offset = offset + capacity[(*cur_node)->type];
-            offset = (*cur_env)->offset;
+            if((*cur_env)->offset == 0)
+            {
+                (*cur_env)->offset = offset + capacity[(*cur_node)->type];
+                offset = (*cur_env)->offset;
+            }
             printf("offset is%d\n",(*cur_env)->offset);
     }
 

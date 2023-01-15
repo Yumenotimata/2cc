@@ -53,6 +53,18 @@ bool match(Token **token,char *expect_str)
     return false;
 }
 
+bool expect(Token **token,char *expect_str)
+{
+    if(isSameString((*token)->str,expect_str))
+    {
+        (*token) = (*token)->next;
+        return true;
+    }
+
+    printf("expect %s but %s\n",expect_str,(*token)->str);
+    exit(1);
+}
+
 int readNum(Token **cur_token)
 {
     int val_buf = (*cur_token)->val;

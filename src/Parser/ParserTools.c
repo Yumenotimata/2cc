@@ -84,8 +84,11 @@ Node *primary(Token **cur_token,Env **cur_env,Node *cur_node)
                 node = expr(cur_token,cur_env,NULL);
                 match(cur_token,")");
                 printf("match )\n");
-                break;
             }
+            break;
+        case TK_STR:
+            node = createStrNode(readStr(cur_token));
+            break;
 
             break;
     }
@@ -98,10 +101,19 @@ Node *parseStr(Token **cur_token,Env **cur_env,Node *cur_node)
 {
     Node *node = NULL;
     printf("parseStr\n");
-    if((node = isInitializetion(cur_token,cur_env,cur_node))!=NULL)
+    if((node = isInitializetion(cur_token,cur_env,cur_node)) != NULL)
     {
         printf("return parse Str\n");
         return node;
+    }
+    if((node = isAssign(cur_token,cur_env,cur_node)) != NULL)
+    {
+        printf("return isassignment\n");
+        return node;
+    }
+    if((node = isReturn(cur_token,cur_env,cur_node)) != NULL)
+    {
+
     }
 }
 
@@ -161,4 +173,40 @@ Node *isDeclaration(Token **cur_token,Env **cur_env,Node *cur_node,TypeKind kind
 
     return node;
 
+}
+
+Node *isAssign(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    printf("isAssign\n");
+    if(findEnv(cur_env,(*cur_token)->str))
+    {
+        Node *node = calloc(1,sizeof(Node));
+        node->kind = ND_ASSIGN;
+        node->str = readStr(cur_token);
+        expect(cur_token,"=");
+        node->rhs = expr(cur_token,cur_env,NULL);
+        node->lhs = cur_node;
+        expect(cur_token,";");
+        return node;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+Node *isReturn(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    if(match(cur_token,"return"))
+    {
+        Node *node = createNode(NULL,NULL,ND_RETURN);
+        node->lhs = cur_node;
+        node->rhs = expr(cur_token,cur_env,cur_node);
+        expect(cur_token,";");
+        return node;
+    }
+    else 
+    {
+        return NULL;
+    }
 }

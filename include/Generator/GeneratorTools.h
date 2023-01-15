@@ -16,5 +16,8 @@
     void genMul(Node *cur_node,Env **cur_env);
     void genDiv(Node *cur_node,Env **cur_env);
     void genInitializetion(Node *cur_node,Env **cur_env);
+    void genAssign(Node *cur_node,Env **cur_env);
+    void genNum(Node *cur_node,Env **cur_env);
+    void genReturn(Node *cur_node,Env **cur_env);
     
 #endif

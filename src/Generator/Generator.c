@@ -10,12 +10,18 @@ void GenerateCode(Node *cur_node,Env **cur_env)
     GenerateCode(cur_node->lhs,cur_env);
     GenerateCode(cur_node->rhs,cur_env);
 
-    printf("node kind is %s\n",node_kind[cur_node->kind]);
+    //printf("node kind is %s\n",node_kind[cur_node->kind]);
 
     switch(cur_node->kind)
     {
         case ND_INIT:
             genInitializetion(cur_node,cur_env);
+            break;
+        case ND_ASSIGN:
+            genAssign(cur_node,cur_env);
+            break;
+        case ND_RETURN:
+            genReturn(cur_node,cur_env);
             break;
     }
 
@@ -47,6 +53,13 @@ void GenerateCalc(Node *cur_node,Env **cur_env)
         case ND_DIV:
             genDiv(cur_node,cur_env);
             break;
+        case ND_NUM:
+            genNum(cur_node,cur_env);
+            break;
+        case ND_VAL:
+            genVal(cur_node,cur_env);
+            break;
+
     }
 
     return;

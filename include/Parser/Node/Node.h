@@ -39,6 +39,9 @@
         ND_INIT,
         ND_ASSIGN,
         ND_RETURN,
+        ND_EQU,
+        ND_IF,
+        ND_IGNORE,
     }NodeKind;
 
     typedef struct Node Node;

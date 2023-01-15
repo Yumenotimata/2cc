@@ -43,11 +43,12 @@ bool match(Token **token,char *expect_str)
 {
     if(isSameString((*token)->str,expect_str))
     {
+        printf("match %s\n",(*token)->str);
         (*token) = (*token)->next;
         return true;
     }
 
-    printf("expected %s\n",expect_str);
+    printf("match? %s\n",expect_str);
     printf("but %s\n",(*token)->str);
     
     return false;

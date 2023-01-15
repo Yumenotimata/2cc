@@ -1,8 +1,7 @@
 int abi = 35 + 2;
+if(abi == 37)
+{
+    return abi;
+}
 
-abi = abi + 2;
-
-char sou;
-sou = (abi *2); 
-
-return sou;
+return abi;

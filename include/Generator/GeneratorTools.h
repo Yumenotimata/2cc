@@ -19,5 +19,7 @@
     void genAssign(Node *cur_node,Env **cur_env);
     void genNum(Node *cur_node,Env **cur_env);
     void genReturn(Node *cur_node,Env **cur_env);
+    void genIfStatement(Node *cur_node,Env **cur_env);
+    void genCondition(Node *cur_node,Env **cur_env);
     
 #endif

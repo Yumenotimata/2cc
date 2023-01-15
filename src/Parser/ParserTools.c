@@ -113,8 +113,15 @@ Node *parseStr(Token **cur_token,Env **cur_env,Node *cur_node)
     }
     if((node = isReturn(cur_token,cur_env,cur_node)) != NULL)
     {
-
+        printf("is return\n");
+        return node;
     }
+    if((node = ifStatement(cur_token,cur_env,cur_node)) != NULL)
+    {
+        printf("is ifStatement\n");
+        return node;
+    }
+
 }
 
 Node *isInitializetion(Token **cur_token,Env **cur_env,Node *cur_node)
@@ -178,12 +185,25 @@ Node *isDeclaration(Token **cur_token,Env **cur_env,Node *cur_node,TypeKind kind
 Node *isAssign(Token **cur_token,Env **cur_env,Node *cur_node)
 {
     printf("isAssign\n");
+
+    if((*cur_token)->next->kind != TK_SYMBOL)
+    {
+        return NULL;
+    }
+
+    if(!isSameString((*cur_token)->next->str,"="))
+    {
+        return NULL;
+    }
+
     if(findEnv(cur_env,(*cur_token)->str))
     {
         Node *node = calloc(1,sizeof(Node));
         node->kind = ND_ASSIGN;
         node->str = readStr(cur_token);
-        expect(cur_token,"=");
+
+        match(cur_token,"=");
+
         node->rhs = expr(cur_token,cur_env,NULL);
         node->lhs = cur_node;
         expect(cur_token,";");
@@ -207,6 +227,57 @@ Node *isReturn(Token **cur_token,Env **cur_env,Node *cur_node)
     }
     else 
     {
+        return NULL;
+    }
+}
+
+Node *isCondition(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    if(!isSameString((*cur_token)->next->str,"=="))
+    {
+        printf("not condition\n");
+        return NULL;
+    }
+
+    Node *node = createNode(NULL,NULL,ND_EQU);
+    node->lhs = expr(cur_token,cur_env,NULL);
+    match(cur_token,"==");
+    node->rhs = expr(cur_token,cur_env,NULL);
+    return node;
+
+}
+
+Node *ifStatement(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    if(match(cur_token,"if"))
+    {
+        Node *ifNode = createNode(cur_node,NULL,ND_IF);
+        printf("ifstatement\n");
+        expect(cur_token,"(");
+        Node *condition_node = isCondition(cur_token,cur_env,NULL);
+        addContext(&condition_node,ND_IGNORE);
+        expect(cur_token,")");
+        expect(cur_token,"{");
+        Node *syntax_node = Parse(cur_token,cur_env,NULL);
+        ifNode->rhs = condition_node;
+        while(condition_node->rhs != NULL)
+        {
+            condition_node = condition_node->rhs;
+        }
+        condition_node->rhs = syntax_node;
+        
+        expect(cur_token,"}");
+
+        GenerateCode(ifNode,cur_env);
+
+        exit(1);
+        return ifNode;
+
+
+    }
+    else
+    {
+        printf("if Statement false\n");
         return NULL;
     }
 }

@@ -9,6 +9,9 @@
     #include <string.h>
     #include <stdio.h>
 
-    Node *Parse(Token **token,Env **env);
+    Node *Parse(Token **token,Env **env,Node *cur_node);
+    void addaptNode(Node *cur_node,Node *addapt_node);
+    void addContext(Node **cur_node,NodeKind kind);
+    void handleEndNode(Node **cur_node);
 
 #endif

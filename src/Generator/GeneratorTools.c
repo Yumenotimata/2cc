@@ -133,3 +133,28 @@ void genReturn(Node *cur_node,Env **cur_env)
     printf("    ret\n");
     return;
 }
+
+void genIfStatement(Node *cur_node,Env **cur_env)
+{
+    printf("gen ifStatement\n");
+    genCondition(cur_node->lhs,cur_env);
+    if(cur_node->lhs->kind == ND_EQU)
+    {
+        printf("    jne .L\n");
+    }
+    GenerateCode(cur_node->rhs->lhs,cur_env);
+
+}
+
+void genCondition(Node *cur_node,Env **cur_env)
+{
+    printf("gen condition\n");
+    GenerateCalc(cur_node->lhs,cur_env);
+    GenerateCalc(cur_node->rhs,cur_env);
+
+    printf("    pop rdi\n");
+    printf("    pop rax\n");
+    printf("    cmp rax,rdi\n");
+
+    return;
+}

@@ -3,7 +3,9 @@
 
     #include "../../include/Token/Token.h"
     #include "../../include/Parser/Node/Node.h"
+    #include "../Generator/Generator.h"
     #include "../../include/Env/Env.h"
+    #include "Parser.h"
     #include <stdio.h>
 
     Node *expr(Token **cur_token,Env **cur_env,Node *cur_node);
@@ -14,5 +16,7 @@
     Node *isDeclaration(Token **cur_token,Env **cur_env,Node *cur_node,TypeKind kind);
     Node *isAssign(Token **cur_token,Env **cur_env,Node *cur_node);
     Node *isReturn(Token **cur_token,Env **cur_env,Node *cur_node);
+    Node *isCondition(Token **cur_token,Env **cur_env,Node *cur_node);
+    Node *ifStatement(Token **cur_token,Env **cur_env,Node *cur_node);
 
 #endif

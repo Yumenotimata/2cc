@@ -8,7 +8,7 @@
         return table;
     }
 
-    void putEnv(Env **cur_env,char *id)
+    void putEnv(Env **cur_env,char *id,TypeKind type)
     {
         while(((*cur_env)->next) != NULL)
         {
@@ -16,6 +16,7 @@
         }
 
         (*cur_env)->id = id;
+        (*cur_env)->type = type;
 
         Env *new_env = calloc(1,sizeof(Env));
         new_env->next = NULL;

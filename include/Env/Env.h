@@ -4,18 +4,10 @@
     #include <stdbool.h>
     #include <stdio.h>
     #include "../Tools/StringTool.h"
-
-    typedef struct Env Env;
-    struct Env
-    {
-        Env *next;
-        Env *head;
-        int offset;
-        char *id;
-    };
+    #include "../Parser/Node/Node.h"
 
     Env *initEnv(void);
-    void putEnv(Env **cur_env,char *id);
+    void putEnv(Env **cur_env,char *id,TypeKind kind);
     bool findEnv(Env **cur_env,char *serch_id);
     bool handleEnv(Env **cur_env,char *serch_id);     
 

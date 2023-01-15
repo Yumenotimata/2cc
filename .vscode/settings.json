@@ -19,6 +19,8 @@
         "parsertools.h": "c",
         "analyzer.h": "c",
         "generator.h": "c",
-        "generatortools.h": "c"
+        "generatortools.h": "c",
+        "type_traits": "c",
+        "analyzertools.h": "c"
     }
 }

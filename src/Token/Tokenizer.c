@@ -37,6 +37,7 @@ Token *Tokenize(FILE *compile_file)
         {
             printf("; is notice\n");
             token->kind = TK_EOS;
+            token->str = ";";
             compile_file_str++;
         }
         else

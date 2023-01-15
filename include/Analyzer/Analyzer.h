@@ -2,7 +2,8 @@
 #define ANALYZER_H
     
     #include "../Parser/Node/Node.h"
+    #include "../Env/Env.h"
 
-    Node *Analyze(Node **cur_node);
+    void Analyze(Node **cur_node,Env **cur_env);
 
 #endif

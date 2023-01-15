@@ -3,8 +3,11 @@
 #include "../include/Parser/Node/Node.h"
 #include "../include/Env/Env.h"
 #include "../include/Generator/Generator.h"
+#include "../include/Analyzer/Analyzer.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+FILE *out_fp = NULL;
 
 int main(int argc,char *argv[])
 {
@@ -31,8 +34,13 @@ int main(int argc,char *argv[])
     Env *env = initEnv();
 
     Node *node = Parse(&token,&env);
-    printf("\n\n%d\n\n",node->val);
-    //printf("%d\n",node->lhs->val);
+    printf("global main\n");
+    out_fp = fopen("../out/code.asm","w");
+    fprintf(out_fp,"global main\nmain:\n    push rbp\n    mov rbp,rsp\n    sub rsp,64\n");
+    printf("%s\n",node_kind[node->kind]);
+    Analyze(&node,&env);
     GenerateCode(node,&env);
+    
+    fprintf(out_fp,"pop rbx\n    mov rsp,rbp\n      pop rbp\n      ret\n");
 
 }

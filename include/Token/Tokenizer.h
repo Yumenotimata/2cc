@@ -7,5 +7,6 @@
 #include <ctype.h>
 
     Token *Tokenize(FILE *compile_file);
+    extern FILE *out_fp;
 
 #endif

@@ -32,5 +32,6 @@
     void ShowToken(Token *token);
     bool match(Token **token,char *expect_str);
     int readNum(Token **cur_token);
+    char *readStr(Token **cur_token);
 
 #endif

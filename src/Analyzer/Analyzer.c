@@ -2,7 +2,8 @@
 #include "../../include/Analyzer/AnalyzerTools.h"
 #include "../../include/Parser/Node/Node.h"
 
-Node *Analyze(Node **cur_node)
+void Analyze(Node **cur_node,Env **cur_env)
 {
-    
+    analyzeOffset(cur_node,cur_env);
 }
+

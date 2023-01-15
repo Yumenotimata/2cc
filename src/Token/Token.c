@@ -60,3 +60,10 @@ int readNum(Token **cur_token)
 
     return val_buf;
 }
+
+char *readStr(Token **cur_token)
+{
+    char *str = (*cur_token)->str;
+    (*cur_token) = (*cur_token)->next;
+    return str;
+}

@@ -14,6 +14,27 @@ void GenerateCode(Node *cur_node,Env **cur_env)
 
     switch(cur_node->kind)
     {
+        case ND_INIT:
+            genInitializetion(cur_node,cur_env);
+            break;
+    }
+
+    return;
+
+}
+
+void GenerateCalc(Node *cur_node,Env **cur_env)
+{
+    if(cur_node == NULL)
+    {
+        return;
+    }
+
+    GenerateCalc(cur_node->lhs,cur_env);
+    GenerateCalc(cur_node->rhs,cur_env);
+
+    switch(cur_node->kind)
+    {
         case ND_ADD:
             genAdd(cur_node,cur_env);
             break;

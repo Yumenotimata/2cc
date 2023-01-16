@@ -4,6 +4,9 @@ CFLAGS = -g -c
 main:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
 	gcc -g -o main main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
 
+debug:main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
+	gcc -g -o main.out main.o Token.o Tokenizer.o TokenizerTools.o Node.o Parser.o ParserTools.o StringTool.o Env.o Analyzer.o AnalyzerTools.o Generator.o GeneratorTools.o
+
 main.o:main.c 
 	gcc $(CFLAGS) ../src/main.c
 

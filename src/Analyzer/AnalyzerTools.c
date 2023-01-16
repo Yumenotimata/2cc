@@ -3,6 +3,7 @@
 void analyzeOffset(Node **cur_node,Env **cur_env)
 {
     static int offset;
+    static int over_all_hierarchy;
 
     if((*cur_node)==NULL)
     {
@@ -24,6 +25,13 @@ void analyzeOffset(Node **cur_node,Env **cur_env)
                 offset = (*cur_env)->offset;
             }
             printf("offset is%d\n",(*cur_env)->offset);
+            
+            break;
+        case ND_IF:
+            (*cur_node)->hierarchy = over_all_hierarchy;
+            over_all_hierarchy += 4;
+            break;
+
     }
 
     return;

@@ -32,7 +32,10 @@
     void ShowToken(Token *token);
     bool match(Token **token,char *expect_str);
     bool expect(Token **token,char *expect_str);
+    bool isSameToken(Token **token,char *expect_str);
     int readNum(Token **cur_token);
     char *readStr(Token **cur_token);
+    
+
 
 #endif

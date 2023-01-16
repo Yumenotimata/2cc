@@ -104,6 +104,7 @@ Node *parseStr(Token **cur_token,Env **cur_env,Node *cur_node)
     if((node = isInitializetion(cur_token,cur_env,cur_node)) != NULL)
     {
         printf("return parse Str\n");
+        //printf("before return. now node kind is %s\n",node_kind[node->kind]);
         return node;
     }
     if((node = isAssign(cur_token,cur_env,cur_node)) != NULL)
@@ -146,6 +147,7 @@ Node *isInitializetion(Token **cur_token,Env **cur_env,Node *cur_node)
     {   
         node->rhs = expr(cur_token,cur_env,NULL);
         match(cur_token,";");
+        printf("now node kind is %s\n",node_kind[node->kind]);
         return node;
     }
     else if(match(cur_token,";"))
@@ -221,7 +223,7 @@ Node *isReturn(Token **cur_token,Env **cur_env,Node *cur_node)
     {
         Node *node = createNode(NULL,NULL,ND_RETURN);
         node->lhs = cur_node;
-        node->rhs = expr(cur_token,cur_env,cur_node);
+        node->rhs = expr(cur_token,cur_env,NULL);
         expect(cur_token,";");
         return node;
     }
@@ -251,29 +253,15 @@ Node *ifStatement(Token **cur_token,Env **cur_env,Node *cur_node)
 {
     if(match(cur_token,"if"))
     {
-        Node *ifNode = createNode(cur_node,NULL,ND_IF);
-        printf("ifstatement\n");
         expect(cur_token,"(");
         Node *condition_node = isCondition(cur_token,cur_env,NULL);
-        addContext(&condition_node,ND_IGNORE);
         expect(cur_token,")");
         expect(cur_token,"{");
         Node *syntax_node = Parse(cur_token,cur_env,NULL);
-        ifNode->rhs = condition_node;
-        while(condition_node->rhs != NULL)
-        {
-            condition_node = condition_node->rhs;
-        }
-        condition_node->rhs = syntax_node;
-        
+        Node *jointNode = createNode(condition_node,syntax_node,ND_IGNORE);
+        Node *ifNode = createNode(cur_node,jointNode,ND_IF);
         expect(cur_token,"}");
-
-        GenerateCode(ifNode,cur_env);
-
-        exit(1);
         return ifNode;
-
-
     }
     else
     {

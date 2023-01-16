@@ -61,9 +61,8 @@ void genNum(Node *cur_node,Env **cur_env)
     switch(cur_node->kind)
     {
         case ND_NUM:
-            printf("    push %d\n",cur_node->val);
-            fprintf(out_fp,"    push %d\n",cur_node->val);
-            break;
+            printf("    .push %d\n",cur_node->val);
+            return;
     }
 
     return;
@@ -85,12 +84,12 @@ void genChild(Node *cur_node,Env **cur_env)
     {
         printf("    pop rax\n");
         printf("    pop rdi\n");
-        fprintf(out_fp,"    pop rax\n    pop rid\n");
+        //fprintf(out_fp,"    pop rax\n    pop rid\n");
     }else
     {
         printf("    pop rdi\n");
         printf("    pop rax\n");
-        fprintf(out_fp,"    pop rdi\n    pop rax\n");
+        //fprintf(out_fp,"    pop rdi\n    pop rax\n");
     }
 }
 
@@ -105,11 +104,11 @@ void genInitializetion(Node *cur_node,Env **cur_env)
         GenerateCalc(cur_node->rhs,cur_env);
         printf("    pop rax\n");
         printf("    mov [rbp-%d],rax\n",(*cur_env)->offset);
-        fprintf(out_fp,"    pop rax\n    mov [rbp-%d],rax\n",(*cur_env)->offset);
+        //fprintf(out_fp,"    pop rax\n    mov [rbp-%d],rax\n",(*cur_env)->offset);
     }else
     {
         printf("    mov [rbp-%d],0\n",(*cur_env)->offset);
-        fprintf(out_fp,"    mov [rbp-%d],0\n",(*cur_env)->offset);
+        //fprintf(out_fp,"    mov [rbp-%d],0\n",(*cur_env)->offset);
     }
 }
 
@@ -137,21 +136,26 @@ void genReturn(Node *cur_node,Env **cur_env)
 void genIfStatement(Node *cur_node,Env **cur_env)
 {
     printf("gen ifStatement\n");
-    genCondition(cur_node->lhs,cur_env);
-    if(cur_node->lhs->kind == ND_EQU)
+    genCondition(cur_node->rhs->lhs,cur_env);
+    if(cur_node->rhs->lhs->kind == ND_EQU)
     {
-        printf("    jne .L\n");
+        printf("    jne .L%d\n",cur_node->hierarchy);
     }
-    GenerateCode(cur_node->rhs->lhs,cur_env);
+    //GenerateCode(cur_node->rhs->rhs,cur_env);
+
+    printf("here\n");
+    GenerateCode(cur_node->rhs->rhs,cur_env);
+    //exit(1);
+    return;
 
 }
 
 void genCondition(Node *cur_node,Env **cur_env)
 {
-    printf("gen condition\n");
+    //printf("gen condition\n");
     GenerateCalc(cur_node->lhs,cur_env);
     GenerateCalc(cur_node->rhs,cur_env);
-
+    //printf("kid is %s\n",node_kind[cur_node->kind]);
     printf("    pop rdi\n");
     printf("    pop rax\n");
     printf("    cmp rax,rdi\n");

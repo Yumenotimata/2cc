@@ -49,6 +49,7 @@
     {
         Node *rhs;
         Node *lhs;
+        int hierarchy;
         NodeKind kind;
         TypeKind type;
         int val;   

@@ -34,13 +34,17 @@ int main(int argc,char *argv[])
     Env *env = initEnv();
 
     Node *node = Parse(&token,&env,NULL);
+    printf("first noed kind is before %s\n",node_kind[node->kind]);
     printf("global main\n");
     out_fp = fopen("../out/code.asm","w");
-    fprintf(out_fp,"global main\nmain:\n    push rbp\n    mov rbp,rsp\n    sub rsp,64\n");
-    printf("%s\n",node_kind[node->kind]);
+    //fprintf(out_fp,"global main\nmain:\n    push rbp\n    mov rbp,rsp\n    sub rsp,64\n");
+     printf("%s\n",node_kind[node->kind]);
     Analyze(&node,&env);
+
+    printf("first node kind is %s\n",node_kind[node->kind]);
+
     GenerateCode(node,&env);
     
-    fprintf(out_fp,"pop rbx\n    mov rsp,rbp\n      pop rbp\n      ret\n");
+    //fprintf(out_fp,"pop rbx\n    mov rsp,rbp\n      pop rbp\n      ret\n");
 
 }

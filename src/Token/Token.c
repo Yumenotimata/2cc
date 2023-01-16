@@ -66,6 +66,24 @@ bool expect(Token **token,char *expect_str)
     exit(1);
 }
 
+bool isSameToken(Token **token,char *expect_str)
+{
+    if((*token)->kind == TK_STR || (*token)->kind == TK_SYMBOL)
+    {
+        if(isSameString((*token)->str,expect_str))
+        {
+            printf("isSameToken %s\n",(*token)->str);
+            return true;
+        }
+
+        printf("isSameToken ? %s but %s\n",expect_str,(*token)->str);
+
+        return false;
+    }
+
+    return false;
+}
+
 int readNum(Token **cur_token)
 {
     int val_buf = (*cur_token)->val;

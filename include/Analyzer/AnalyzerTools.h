@@ -5,5 +5,6 @@
     #include "../Parser/Node/Node.h"
 
     void analyzeOffset(Node **cur_node,Env **cur_env);
+    int analyzeOffset_s(Node **cur_node,Env **cur_env,int *offset);
 
 #endif

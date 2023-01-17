@@ -17,7 +17,7 @@ void genAdd(Node *cur_node,Env **cur_env)
 
     printf("    add rax,rdi\n");
     printf("    push rax\n");
-    fprintf(out_fp,"    add rax,rdi\n    push rax\n");
+    //fprintf(out_fp,"    add rax,rdi\n    push rax\n");
 
     return;
 }
@@ -28,7 +28,7 @@ void genSub(Node *cur_node,Env **cur_env)
 
     printf("    sub rax,rdi\n");
     printf("    push rax\n");
-    fprintf(out_fp,"    sub rax,rdi\n    push rax\n");
+   // fprintf(out_fp,"    sub rax,rdi\n    push rax\n");
 
     return;
 }
@@ -39,7 +39,7 @@ void genMul(Node *cur_node,Env **cur_env)
 
     printf("    imul rax,rdi\n");
     printf("    push rax\n");
-    fprintf(out_fp,"    imul rax,rdi\n    push rax\n");
+   // fprintf(out_fp,"    imul rax,rdi\n    push rax\n");
 
     return;
 }
@@ -51,7 +51,7 @@ void genDiv(Node *cur_node,Env **cur_env)
     printf("    cqo\n");
     printf("    idiv rdi\n");
     printf("    push rax\n");
-    fprintf(out_fp,"    cqo\n    idiv rdi\n    push rax\n");
+  //  fprintf(out_fp,"    cqo\n    idiv rdi\n    push rax\n");
 
     return;
 }
@@ -61,7 +61,7 @@ void genNum(Node *cur_node,Env **cur_env)
     switch(cur_node->kind)
     {
         case ND_NUM:
-            printf("    .push %d\n",cur_node->val);
+            printf("    push %d\n",cur_node->val);
             return;
     }
 
@@ -95,7 +95,7 @@ void genChild(Node *cur_node,Env **cur_env)
 
 void genInitializetion(Node *cur_node,Env **cur_env)
 {
-    printf("gen initializetion\n");
+    //printf("gen initializetion\n");
 
     findEnv(cur_env,cur_node->lhs->str);
 
@@ -114,8 +114,8 @@ void genInitializetion(Node *cur_node,Env **cur_env)
 
 void genAssign(Node *cur_node,Env **cur_env)
 {
-    printf("gen assign\n");
-    printf("%s tansaku\n",(cur_node)->str);
+    //printf("gen assign\n");
+    //printf("%s tansaku\n",(cur_node)->str);
     GenerateCalc(cur_node->rhs,cur_env);
     findEnv(cur_env,cur_node->str);
     printf("    pop rax\n");
@@ -126,7 +126,7 @@ void genAssign(Node *cur_node,Env **cur_env)
 
 void genReturn(Node *cur_node,Env **cur_env)
 {
-    printf("gen return\n");
+    //printf("gen return\n");
     GenerateCalc(cur_node->rhs,cur_env);
     printf("    pop rbx\n");
     printf("    ret\n");
@@ -135,18 +135,53 @@ void genReturn(Node *cur_node,Env **cur_env)
 
 void genIfStatement(Node *cur_node,Env **cur_env)
 {
-    printf("gen ifStatement\n");
+    //printf("gen ifStatement\n");
     genCondition(cur_node->rhs->lhs,cur_env);
     if(cur_node->rhs->lhs->kind == ND_EQU)
     {
         printf("    jne .L%d\n",cur_node->hierarchy);
     }
+    else if(cur_node->rhs->lhs->kind == ND_BS)
+    {
+        printf("    jle .L%d\n",cur_node->hierarchy);
+    }
+    else if(cur_node->rhs->lhs->kind == ND_SB)
+    {
+        printf("    jg .L%d\n",cur_node->hierarchy);
+    }
     //GenerateCode(cur_node->rhs->rhs,cur_env);
-
-    printf("here\n");
-    GenerateCode(cur_node->rhs->rhs,cur_env);
+    GenerateCode(cur_node->rhs->rhs->lhs,cur_env);
+    printf("    jmp .L%d\n",cur_node->hierarchy + 1);
+    printf(".L%d:\n",cur_node->hierarchy);
+    GenerateCode(cur_node->rhs->rhs->rhs,cur_env);
+    printf(".L%d:\n",cur_node->hierarchy + 1);
     //exit(1);
     return;
+
+}
+
+void genWhileStatement(Node *cur_node,Env **cur_env)
+{
+    printf(".L%d:\n",cur_node->hierarchy);
+    genCondition(cur_node->rhs->lhs,cur_env);
+    if(cur_node->rhs->lhs->kind == ND_EQU)
+    {
+        printf("    jne .L%d\n",cur_node->hierarchy+1);
+    }
+    else if(cur_node->rhs->lhs->kind == ND_BS)
+    {
+        printf("    jle .L%d\n",cur_node->hierarchy+1);
+    }
+    else if(cur_node->rhs->lhs->kind == ND_SB)
+    {
+        printf("    jg .L%d\n",cur_node->hierarchy+1);
+    }
+    GenerateCode(cur_node->rhs->rhs,cur_env);
+    printf("    jmp .L%d\n",cur_node->hierarchy);
+    printf(".L%d:\n",cur_node->hierarchy + 1);
+
+    return;
+
 
 }
 

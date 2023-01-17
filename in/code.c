@@ -1,13 +1,11 @@
-int abi = 3 + 2;
-
-if(abi == 23)
+int func(int a,int b)
 {
-    if(abi == 454)
-    {
-        return 1;
-    }
-
-    return 4;
+    int sou;
+    int emu;
 }
 
-return abi;
+int main(void)
+{
+    int result = 2;
+    return result;
+}

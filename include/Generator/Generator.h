@@ -8,5 +8,6 @@
 
     void GenerateCode(Node *cur_node,Env **cur_env);
     void GenerateCalc(Node *cur_node,Env **cur_env);
+    void GenerateFunction(Node *cur_node,Env **cur_env);
 
 #endif

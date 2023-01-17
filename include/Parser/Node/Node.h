@@ -14,6 +14,7 @@
         CHAR,
         INT_PTR,
         CHAR_PTR,
+        VOID,
     }TypeKind;
 
 
@@ -42,6 +43,12 @@
         ND_EQU,
         ND_IF,
         ND_IGNORE,
+        ND_NULL,
+        ND_SB,
+        ND_BS,
+        ND_WHILE,
+        ND_FUNC,
+        ND_ARGUMENT,
     }NodeKind;
 
     typedef struct Node Node;
@@ -54,6 +61,7 @@
         TypeKind type;
         int val;   
         char *str; 
+        int shift;
     };
 
     Node *createNumNode(int val);

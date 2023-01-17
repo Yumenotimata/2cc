@@ -40,10 +40,12 @@ int main(int argc,char *argv[])
     //fprintf(out_fp,"global main\nmain:\n    push rbp\n    mov rbp,rsp\n    sub rsp,64\n");
      printf("%s\n",node_kind[node->kind]);
     Analyze(&node,&env);
-
+    findEnv(&env,"result");
+    printf("offset is %d\n",env->offset);
     printf("first node kind is %s\n",node_kind[node->kind]);
 
-    GenerateCode(node,&env);
+    GenerateFunction(node,&env);
+    //GenerateCode(node,&env);
     
     //fprintf(out_fp,"pop rbx\n    mov rsp,rbp\n      pop rbp\n      ret\n");
 

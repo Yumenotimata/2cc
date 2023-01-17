@@ -30,6 +30,7 @@ Node *Parse(Token **token,Env **env,Node *cur_node)
                 {
                     printf("}ended\n");
                     addaptNode(node,cur_node);
+                    printf("addafptednode\n");
                     return node;
                 }
                 break;

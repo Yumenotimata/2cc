@@ -41,6 +41,12 @@ void ShowToken(Token *token)
 
 bool match(Token **token,char *expect_str)
 {
+    if((*token) == NULL)
+    {
+        printf("token was NULL\n");
+        exit(1);
+    }
+
     if(isSameString((*token)->str,expect_str))
     {
         printf("match %s\n",(*token)->str);
@@ -56,10 +62,13 @@ bool match(Token **token,char *expect_str)
 
 bool expect(Token **token,char *expect_str)
 {
-    if(isSameString((*token)->str,expect_str))
+     if((*token)->kind == TK_STR || (*token)->kind == TK_SYMBOL || (*token)->kind == TK_EOS)
     {
-        (*token) = (*token)->next;
-        return true;
+        if(isSameString((*token)->str,expect_str))
+        {
+            (*token) = (*token)->next;
+            return true;
+        }
     }
 
     printf("expect %s but %s\n",expect_str,(*token)->str);
@@ -68,7 +77,7 @@ bool expect(Token **token,char *expect_str)
 
 bool isSameToken(Token **token,char *expect_str)
 {
-    if((*token)->kind == TK_STR || (*token)->kind == TK_SYMBOL)
+    if((*token)->kind == TK_STR || (*token)->kind == TK_SYMBOL  || (*token)->kind == TK_EOS)
     {
         if(isSameString((*token)->str,expect_str))
         {

@@ -39,7 +39,7 @@ char *ConsumeSymbol(char **str)
     {
         "==",   "<=",   ">=",   "(",    ")",  
         "+",    "-",    "*",    "/",    "=",
-        "{",    "}"
+        "{",    "}",    "<",    ">",    ","
     };
 
     printf("*symbol_s size is %ld\n",(sizeof(symbol_s)/sizeof(*symbol_s)));
@@ -53,7 +53,7 @@ char *ConsumeSymbol(char **str)
             return symbol_s[ar_ptr_i];
         }
     }
-    printf("unexpected symbol\n");
+    printf("unexpected symbol %s\n",(*str));
     exit(1);
 }
 
@@ -78,7 +78,7 @@ bool issymbol(char ch)
     {
         '+',    '-',    '*',    '/',
         '(',    ')',    '{',    '}',
-        '='
+        '=',    '<',    '>',    ','
     };
 
     printf("size is %ld\n",sizeof(symbol_s));

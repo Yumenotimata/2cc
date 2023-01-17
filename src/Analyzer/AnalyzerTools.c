@@ -27,12 +27,21 @@ int analyzeOffset_s(Node **cur_node,Env **cur_env,int *offset)
             
             break;
         case ND_IF:
-            (*cur_node)->hierarchy = over_all_hierarchy;
-            over_all_hierarchy += 4;
+            printf("ND_IF hierar %d\n",over_all_hierarchy);
+            
+                (*cur_node)->hierarchy = over_all_hierarchy;
+                over_all_hierarchy += 4;
+            
+           
+            printf("ND_IF hierar after %d\n",over_all_hierarchy);
             break;
         case ND_WHILE:
-            (*cur_node)->hierarchy = over_all_hierarchy;
-            over_all_hierarchy += 4;
+         printf("ND_IF hierar %d\n",over_all_hierarchy);
+            
+                (*cur_node)->hierarchy = over_all_hierarchy;
+                over_all_hierarchy += 4;
+            
+            printf("ND_IF hierar after %d\n",over_all_hierarchy);
             break;
 
     }

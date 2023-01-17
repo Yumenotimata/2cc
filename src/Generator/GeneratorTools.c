@@ -129,7 +129,7 @@ void genReturn(Node *cur_node,Env **cur_env)
     //printf("gen return\n");
     GenerateCalc(cur_node->rhs,cur_env);
     printf("    pop rbx\n");
-    printf("    ret\n");
+    //printf("    ret\n");
     return;
 }
 

@@ -12,5 +12,7 @@
     void GenerateFunction(Node *cur_node,Env **cur_env);
     void generateArgument(Node *cur_node,Env **cur_env,int *arg_index);
     int countArgument(Node *cur_node);
+    void genCall(Node *cur_node,Env **cur_env);
+    void genCallArgment(Node *cur_node,Env **cur_env,int *arg_index);
 
 #endif

@@ -1,8 +1,8 @@
 #include "../../../include/Parser/Node/Node.h"
 
-const char *node_kind[19] =
+const char *node_kind[20] =
 {
-    "ND_NUM","ND_ADD","ND_SUB","ND_MUL","ND_DIV","ND_CALC","ND_VAL","ND_INIT","ND_ASSIGN","ND_RETURN","ND_EQU","ND_IF","ND_IGNORE","ND_NULL","ND_SB","ND_BS","ND_WHILE","ND_FUNC","ND_ARGUMENT"
+    "ND_NUM","ND_ADD","ND_SUB","ND_MUL","ND_DIV","ND_CALC","ND_VAL","ND_INIT","ND_ASSIGN","ND_RETURN","ND_EQU","ND_IF","ND_IGNORE","ND_NULL","ND_SB","ND_BS","ND_WHILE","ND_FUNC","ND_ARGUMENT","ND_CALL"
 };
 
 const char *type_kind[5] = 

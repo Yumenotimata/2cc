@@ -89,12 +89,14 @@ void genInitializetion(Node *cur_node,Env **cur_env)
 {
     findEnv(cur_env,cur_node->lhs->str);
 
+
     if(cur_node->rhs != NULL)
     {
         GenerateCalc(cur_node->rhs,cur_env);
         printf("    pop rax\n");
         printf("    mov [rbp-%d],rax\n",(*cur_env)->offset);
-    }else
+    }
+    else
     {
         printf("    mov [rbp-%d],0\n",(*cur_env)->offset);
     }

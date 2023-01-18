@@ -49,6 +49,7 @@
         ND_WHILE,
         ND_FUNC,
         ND_ARGUMENT,
+        ND_CALL,
     }NodeKind;
 
     typedef struct Node Node;

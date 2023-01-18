@@ -22,5 +22,7 @@
     Node *ifStatement(Token **cur_token,Env **cur_env,Node *cur_node);
     Node *isWhileStatement(Token **cur_token,Env **cur_env,Node *cur_node);
     Node *isArgumentNode(Token **cur_token,Env **cur_env,Node *cur_node);
+    Node *isFunctionNode(Token **cur_token,Env **cue_env,Node *cur_node);
+    Node *funcArgument(Token **cur_token,Env **cur_env,Node *cur_node);
 
 #endif

@@ -76,9 +76,35 @@ void GenerateCode(Node *cur_node,Env **cur_env)
 
 }
 
-void GenerateCalc(Node *cur_node,Env **cur_env)
+void genCall(Node *cur_node,Env **cur_env)
+{
+    int arg_index = 0;
+    genCallArgment(cur_node->rhs->rhs,cur_env,&arg_index);
+    printf("    call %s\n",cur_node->str);
+}
+
+void genCallArgment(Node *cur_node,Env **cur_env,int *arg_index)
 {
     if(cur_node == NULL)
+    {
+        //printf("null return\n");
+        return;
+    }
+
+    genCallArgment(cur_node->lhs,cur_env,arg_index);
+    
+    GenerateCalc(cur_node->rhs,cur_env);
+    printf("    pop rax\n");
+    //printf("}\n");
+    printf("    mov %s,rax\n",arg_resister[*arg_index]);
+    (*arg_index)++;
+
+    return;
+}
+
+void GenerateCalc(Node *cur_node,Env **cur_env)
+{
+    if(cur_node == NULL|| cur_node->kind == ND_ARGUMENT)
     {
         return;
     }
@@ -107,6 +133,10 @@ void GenerateCalc(Node *cur_node,Env **cur_env)
             break;
         case ND_VAL:
             genVal(cur_node,cur_env);
+            break;
+        case ND_CALL:
+            int arg_index = 0;
+            genCall(cur_node,cur_env);
             break;
 
     }

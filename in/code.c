@@ -19,7 +19,7 @@ char degozaru(char c,char ebi)
 
 int main(void)
 {
-    int result = 2;
+    int result = func(6,5,3);
     if(result > 2)
     {
         return 5;

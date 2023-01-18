@@ -45,7 +45,6 @@ bool match(Token **token,char *expect_str)
     {
         exit(1);
     }
-
     if(isSameString((*token)->str,expect_str))
     {
         printf("match %s\n",(*token)->str);
@@ -62,6 +61,7 @@ bool expect(Token **token,char *expect_str)
     {
         if(isSameString((*token)->str,expect_str))
         {
+            printf("expect match %s\n",(*token)->str);
             (*token) = (*token)->next;
             return true;
         }

@@ -74,12 +74,57 @@ Node *primary(Token **cur_token,Env **cur_env,Node *cur_node)
                 node = expr(cur_token,cur_env,NULL);
                 match(cur_token,")");
             }
+            printf("tk-symbol\n");
             break;
         case TK_STR:
-            node = createStrNode(readStr(cur_token));
+            printf("%s\n",(*cur_token)->str);
+            if((node = isFunctionNode(cur_token,cur_env,NULL)) == NULL)
+            {   
+                node = createStrNode(readStr(cur_token));
+            }
+            printf("is function_here\n");
             break;
     }
 
+    return node;
+}
+
+Node *isFunctionNode(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    if(!isSameToken(&(*cur_token)->next,"("))
+    {
+        printf("not function\n");
+        return NULL;
+    }
+    printf("isfunction\n");
+    Node *call_node = createNode(NULL,NULL,ND_CALL);
+    call_node->str = readStr(cur_token);
+    expect(cur_token,"(");
+    Node *argument_node = NULL;
+
+    while(!isSameToken(cur_token,")"))
+    {
+        argument_node = funcArgument(cur_token,cur_env,argument_node);
+    }
+    Node *add = calloc(1,sizeof(Node));
+    add->rhs = argument_node;
+    add->lhs = NULL;
+    add->kind = ND_ARGUMENT;
+
+    call_node->rhs = add;
+    call_node->lhs = cur_node;
+    match(cur_token,")");
+    printf("_asd_%s\n",(*cur_token)->str);
+
+    return call_node;
+}
+
+Node *funcArgument(Token **cur_token,Env **cur_env,Node *cur_node)
+{
+    Node *node = createNode(NULL,NULL,ND_NULL);
+    node->rhs =  expr(cur_token,cur_env,NULL);
+    node->lhs = cur_node;
+    match(cur_token,",");
     return node;
 }
 

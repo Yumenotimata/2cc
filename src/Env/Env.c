@@ -23,7 +23,6 @@
         new_env->head = (*cur_env)->head;
         (*cur_env)->next = new_env;
         (*cur_env) = (*cur_env)->next;
-
     }
 
     bool findEnv(Env **cur_env,char *serch_id)

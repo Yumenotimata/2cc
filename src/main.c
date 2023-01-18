@@ -29,24 +29,17 @@ int main(int argc,char *argv[])
     }
 
     Token *token = Tokenize(compile_file);
-    ShowToken(token);
+    //ShowToken(token);
 
     Env *env = initEnv();
 
     Node *node = Parse(&token,&env,NULL);
-    printf("first noed kind is before %s\n",node_kind[node->kind]);
-    printf("global main\n");
-    out_fp = fopen("../out/code.asm","w");
-    //fprintf(out_fp,"global main\nmain:\n    push rbp\n    mov rbp,rsp\n    sub rsp,64\n");
-     printf("%s\n",node_kind[node->kind]);
+
+
     Analyze(&node,&env);
-    findEnv(&env,"result");
-    printf("offset is %d\n",env->offset);
-    printf("first node kind is %s\n",node_kind[node->kind]);
+
 
     GenerateFunction(node,&env);
-    //GenerateCode(node,&env);
-    
-    //fprintf(out_fp,"pop rbx\n    mov rsp,rbp\n      pop rbp\n      ret\n");
 
+    return 0;
 }
